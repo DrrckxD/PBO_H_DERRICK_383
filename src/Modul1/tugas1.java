@@ -1,3 +1,5 @@
+package Modul1;
+
 import java.util.Scanner;
 
 public class tugas1 {
@@ -47,7 +49,7 @@ public class tugas1 {
                     System.out.println("Login gagal! Nama atau NIM salah.");
                 }
             }
-        }    
+        }
 
         scanner.close();
     }
