@@ -47,7 +47,7 @@ public class tugas1 {
                     System.out.println("Login gagal! Nama atau NIM salah.");
                 }
             }
-        }  
+        }    
 
         scanner.close();
     }
