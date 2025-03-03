@@ -6,41 +6,41 @@ public class tugas1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Displaying login options
+        // Tampilan opsi login
         System.out.println("Pilih login:");
         System.out.println("1. Admin");
         System.out.println("2. Mahasiswa");
         System.out.print("Masukkan pilihan: ");
         int loginChoice = scanner.nextInt();
 
-        // Handling invalid choices
+        // Memastikan user menginputkan pilihan yang sesuai
         if (loginChoice != 1 && loginChoice != 2) {
             System.out.println("Pilihan tidak valid.");
         } else {
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine(); //Membuat baris baru
 
-            // Admin login
+            // Login admin
             if (loginChoice == 1) {
                 System.out.print("Masukkan username: ");
                 String username = scanner.nextLine();
                 System.out.print("Masukkan password: ");
                 String password = scanner.nextLine();
 
-                // Checking Admin credentials
+                // Memverifikasi apakah login admin sesuai atau tidak
                 if (username.equals("Admin383") && password.equals("Password383")) {
                     System.out.println("Login Admin berhasil!");
                 } else {
                     System.out.println("Login gagal! Username atau password salah.");
                 }
             }
-            // Mahasiswa login
+            // Login mahasiswa
             else if (loginChoice == 2) {
                 System.out.print("Masukkan Nama: ");
                 String name = scanner.nextLine();
                 System.out.print("Masukkan NIM: ");
                 String nim = scanner.nextLine();
 
-                // Checking Mahasiswa credentials
+                // Memverifikasi apakah login mahasiswa sesuai atau tidak
                 if (name.equals("Derrick Muhammad Hanif") && nim.equals("202410370110383")) {
                     System.out.println("Login Mahasiswa berhasil!");
                     System.out.println("Nama: " + name);
