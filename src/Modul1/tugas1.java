@@ -53,4 +53,4 @@ public class tugas1 {
 
         scanner.close();
     }
-}
+} 
