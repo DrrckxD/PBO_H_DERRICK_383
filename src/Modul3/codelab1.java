@@ -22,7 +22,6 @@ class KarakterGame {
     }
 
     public void serang(KarakterGame target) {
-        // Akan di-override oleh subclass
     }
 }
 
@@ -31,11 +30,29 @@ class Pahlawan extends KarakterGame {
         super(nama, kesehatan);
     }
 
+    public void serangMematikan(KarakterGame target) {
+        System.out.println(getNama() + " menyerang " + target.getNama() + " menggunakan Orbital Strike!");
+        target.setKesehatan(target.getKesehatan() - 1000);
+        if (target.getKesehatan() <= 0) {
+            System.out.println(target.getNama() + " telah Meninggoy!");
+            System.out.print("==========================================\n");
+        } else {
+            System.out.println(target.getNama() + " sekarang memiliki kesehatan " + target.getKesehatan());
+            System.out.print("==========================================\n");
+        }
+    }
+
     @Override
     public void serang(KarakterGame target) {
-        System.out.println(getNama() + " menyerang " + target.getNama() + " menggunakan Orbital Strike!");
+        System.out.println(getNama() + " menyerang " + target.getNama() + " menggunakan Molly");
         target.setKesehatan(target.getKesehatan() - 20);
-        System.out.println(target.getNama() + " sekarang memiliki kesehatan " + target.getKesehatan());
+        if (target.getKesehatan() <= 0) {
+            System.out.println(target.getNama() + " telah Meninggoy!");
+            System.out.print("==========================================\n");
+        } else {
+            System.out.println(target.getNama() + " sekarang memiliki kesehatan " + target.getKesehatan());
+            System.out.print("==========================================\n");
+        }
     }
 }
 
@@ -48,7 +65,13 @@ class Musuh extends KarakterGame {
     public void serang(KarakterGame target) {
         System.out.println(getNama() + " menyerang " + target.getNama() + " menggunakan Snake Bite!");
         target.setKesehatan(target.getKesehatan() - 15);
-        System.out.println(target.getNama() + " sekarang memiliki kesehatan " + target.getKesehatan());
+        if (target.getKesehatan() <= 0) {
+            System.out.println(target.getNama() + " telah Meninggoy!");
+            System.out.print("==========================================\n");
+        } else {
+            System.out.println(target.getNama() + " sekarang memiliki kesehatan " + target.getKesehatan());
+            System.out.print("==========================================\n");
+        }
     }
 }
 
@@ -56,14 +79,15 @@ public class codelab1 {
     public static void main(String[] args) {
         KarakterGame karakterUmum = new KarakterGame("Karakter Umum", 100);
         Pahlawan brimstone = new Pahlawan("Brimstone", 150);
-        Musuh viper = new Musuh("Viper", 200);
+        Musuh viper = new Musuh("Viper", 150);
 
         System.out.println("Status awal:");
         System.out.println(brimstone.getNama() + " memiliki kesehatan: " + brimstone.getKesehatan());
         System.out.println(viper.getNama() + " memiliki kesehatan: " + viper.getKesehatan());
+        System.out.print("==========================================\n");
 
         brimstone.serang(viper);
         viper.serang(brimstone);
+        brimstone.serangMematikan(viper);
     }
 }
-
