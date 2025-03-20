@@ -77,7 +77,7 @@ class Musuh extends KarakterGame {
 
 public class codelab1 {
     public static void main(String[] args) {
-        KarakterGame karakterUmum = new KarakterGame("Karakter Umum", 100);
+        KarakterGame NPC = new KarakterGame("NPC", 100);
         Pahlawan brimstone = new Pahlawan("Brimstone", 150);
         Musuh viper = new Musuh("Viper", 150);
 
