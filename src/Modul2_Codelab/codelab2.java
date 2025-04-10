@@ -1,4 +1,4 @@
-package Modul2;
+package Modul2_Codelab;
 
 class RekeningBank {
     // Atribut

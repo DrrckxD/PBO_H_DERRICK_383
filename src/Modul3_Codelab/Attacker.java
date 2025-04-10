@@ -1,4 +1,4 @@
-package Modul3_Codelab1;
+package Modul3_Codelab;
 
 class Attacker extends KarakterGame {
     public Attacker(String nama, int kesehatan) {

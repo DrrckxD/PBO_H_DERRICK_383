@@ -1,4 +1,4 @@
-package Modul3_Codelab1;
+package Modul3_Codelab;
 
 class Defender extends KarakterGame {
     public Defender(String nama, int kesehatan) {

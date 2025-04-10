@@ -1,4 +1,4 @@
-package Modul1;
+package Modul1_Tugas;
 
 import java.util.Scanner;
 

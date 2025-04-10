@@ -1,4 +1,4 @@
-package Modul3_Codelab1;
+package Modul3_Codelab;
 
 class KarakterGame {
     private String nama;
