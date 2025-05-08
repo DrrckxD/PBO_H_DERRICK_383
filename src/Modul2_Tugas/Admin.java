@@ -2,7 +2,7 @@ package Modul2_Tugas;
 
 import java.util.Scanner;
 
-class Admin extends User {
+public class Admin extends User {
 
     @Override
     public void login(Scanner scanner) {
