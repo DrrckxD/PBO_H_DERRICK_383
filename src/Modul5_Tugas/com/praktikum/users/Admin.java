@@ -3,6 +3,7 @@ package Modul5_Tugas.com.praktikum.users;
 import Modul5_Tugas.com.praktikum.data.Item;
 import Modul5_Tugas.com.praktikum.main.CentralStorage;
 import Modul5_Tugas.com.praktikum.actions.AdminActions;
+import Modul5_Tugas.com.praktikum.main.Login;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -158,7 +159,7 @@ public class Admin extends User implements AdminActions {
         String nim = scanner.nextLine();
 
         Mahasiswa mahasiswa = new Mahasiswa(name, nim);
-        CentralStorage.userList.add(mahasiswa);
+        Login.userList.add(mahasiswa);
         System.out.println("Mahasiswa berhasil ditambahkan!");
     }
 
@@ -169,7 +170,7 @@ public class Admin extends User implements AdminActions {
         System.out.print("Masukkan NIM Mahasiswa yang akan dihapus: ");
         String nimToDelete = scanner.nextLine();
 
-        Iterator<User> iterator = CentralStorage.userList.iterator();
+        Iterator<User> iterator = Login.userList.iterator();
         boolean found = false;
 
         while (iterator.hasNext()) {
