@@ -31,8 +31,7 @@ public class MahasiswaDashboard {
         welcomeLabel.setForeground(new Color(33, 150, 243));
         welcomeLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.add(welcomeLabel);
-
-        // Table for displaying reported items
+        
         String[] columnNames = {"Nama Barang", "Lokasi", "Deskripsi", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
@@ -43,7 +42,6 @@ public class MahasiswaDashboard {
         JScrollPane scrollPane = new JScrollPane(table);
         contentPanel.add(scrollPane);
 
-        // Form panel for adding new items
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(5, 2, 10, 10));
 
@@ -139,12 +137,12 @@ public class MahasiswaDashboard {
 
         frame.setVisible(true);
 
-        // Load existing items from CentralStorage
+
         loadItems();
     }
 
     private void loadItems() {
-        model.setRowCount(0);  // Clear existing rows
+        model.setRowCount(0);
         for (Item item : CentralStorage.reportedItems) {
             model.addRow(new Object[]{item.getItemName(), item.getLocation(), item.getDescription(), item.getStatus()});
         }
