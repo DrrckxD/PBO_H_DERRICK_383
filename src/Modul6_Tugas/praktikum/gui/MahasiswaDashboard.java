@@ -15,104 +15,143 @@ public class MahasiswaDashboard {
     private DefaultTableModel model;
 
     public MahasiswaDashboard(Mahasiswa mahasiswa) {
-        // Setup frame
         frame = new JFrame("Dashboard Mahasiswa");
-        frame.setLayout(new BorderLayout(20, 20));  // Add margin between components
-        frame.setSize(1500, 850);  // Set large size for better visibility
+        frame.setSize(1500, 850);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);  // Center window
-        frame.setResizable(false);  // Prevent resizing
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
 
-        // Welcome Label with improved font and alignment
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        frame.add(contentPanel, BorderLayout.CENTER);
+
         JLabel welcomeLabel = new JLabel("Selamat datang, " + mahasiswa.getUsername(), SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        welcomeLabel.setForeground(new Color(33, 150, 243)); // Nice blue color
-        welcomeLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Add padding to the label
-        frame.add(welcomeLabel, BorderLayout.NORTH);
+        welcomeLabel.setForeground(new Color(33, 150, 243));
+        welcomeLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPanel.add(welcomeLabel);
 
-        // Table setup with Status Column
-        String[] columnNames = {"Nama Barang", "Lokasi", "Status"};
+        // Table for displaying reported items
+        String[] columnNames = {"Nama Barang", "Lokasi", "Deskripsi", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));  // Set table font
-        table.setRowHeight(30);  // Set row height
-        table.setSelectionBackground(new Color(33, 150, 243)); // Highlight selection color
-        table.setSelectionForeground(Color.WHITE); // Text color when row selected
-        JScrollPane scrollPane = new JScrollPane(table);  // Add scroll pane to table
-        frame.add(scrollPane, BorderLayout.CENTER);  // Add the table panel to the center of the frame
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.setRowHeight(30);
+        table.setSelectionBackground(new Color(33, 150, 243));
+        table.setSelectionForeground(Color.WHITE);
+        JScrollPane scrollPane = new JScrollPane(table);
+        contentPanel.add(scrollPane);
 
-        // Create a panel for the form and buttons
+        // Form panel for adding new items
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(3, 2, 10, 10));  // Using GridLayout for form elements
+        formPanel.setLayout(new GridLayout(5, 2, 10, 10));
 
         JLabel itemLabel = new JLabel("Nama Barang:");
         JTextField itemField = new JTextField(20);
         JLabel locationLabel = new JLabel("Lokasi:");
         JTextField locationField = new JTextField(20);
 
+        JLabel descriptionLabel = new JLabel("Deskripsi:");
+        JRadioButton kecilButton = new JRadioButton("Kecil");
+        JRadioButton sedangButton = new JRadioButton("Sedang");
+        JRadioButton besarButton = new JRadioButton("Besar");
+
+        ButtonGroup descriptionGroup = new ButtonGroup();
+        descriptionGroup.add(kecilButton);
+        descriptionGroup.add(sedangButton);
+        descriptionGroup.add(besarButton);
+
         formPanel.add(itemLabel);
         formPanel.add(itemField);
         formPanel.add(locationLabel);
         formPanel.add(locationField);
+        formPanel.add(descriptionLabel);
+        JPanel radioPanel = new JPanel();
+        radioPanel.add(kecilButton);
+        radioPanel.add(sedangButton);
+        radioPanel.add(besarButton);
+        formPanel.add(radioPanel);
 
-        // Panel for the buttons (backButton and reportButton)
+        contentPanel.add(formPanel);
+
+        JPanel gapPanel = new JPanel();
+        gapPanel.setPreferredSize(new Dimension(10, 20));
+        contentPanel.add(gapPanel);
+
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));  // Center aligned buttons with margin
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         JButton backButton = new JButton("Kembali ke Login");
-        backButton.setBackground(new Color(244, 67, 54));  // Red button
+        backButton.setBackground(new Color(244, 67, 54));
         backButton.setForeground(Color.WHITE);
         backButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        backButton.setFocusPainted(false);  // Remove border focus
+        backButton.setFocusPainted(false);
         backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Kembali ke Menu Login
-                frame.dispose();  // Close the current window
-                new LoginPane();  // Open Login Window
+                frame.dispose();
+                new LoginPane();
             }
         });
 
         JButton reportButton = new JButton("Laporkan");
-        reportButton.setBackground(new Color(33, 150, 243));  // Button color
+        reportButton.setBackground(new Color(33, 150, 243));
         reportButton.setForeground(Color.WHITE);
         reportButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        reportButton.setFocusPainted(false);  // Remove border focus
+        reportButton.setFocusPainted(false);
         reportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Button action to add row in the table and store in CentralStorage
         reportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String itemName = itemField.getText();
                 String location = locationField.getText();
+                String description = "No Description";
+
+                if (kecilButton.isSelected()) {
+                    description = "Kecil";
+                } else if (sedangButton.isSelected()) {
+                    description = "Sedang";
+                } else if (besarButton.isSelected()) {
+                    description = "Besar";
+                }
+
                 if (!itemName.isEmpty() && !location.isEmpty()) {
-                    // Create item and add it to CentralStorage
-                    Item newItem = new Item(itemName, "No Description", location, "Belum Diclaim");
-                    CentralStorage.reportedItems.add(newItem);  // Store in the CentralStorage
-                    model.addRow(new Object[]{itemName, location, "Belum Diclaim"});  // Update table
-                    itemField.setText("");  // Clear input fields
+                    Item newItem = new Item(itemName, description, location, "Belum Diclaim");
+                    CentralStorage.reportedItems.add(newItem);
+                    model.addRow(new Object[]{itemName, location, description, "Belum Diclaim"});
+                    itemField.setText("");
                     locationField.setText("");
+                    descriptionGroup.clearSelection();
                 }
             }
         });
 
-        // Add both buttons (backButton and reportButton) to buttonPanel
-        buttonPanel.add(backButton);  // Kembali ke Login button
-        buttonPanel.add(reportButton);  // Laporkan button
+        buttonPanel.add(backButton);
+        buttonPanel.add(reportButton);
 
-        // Add the form and button panel to the bottom part of the frame
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.add(formPanel, BorderLayout.CENTER);
         bottomPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        frame.add(bottomPanel, BorderLayout.SOUTH);  // Add the bottom panel below the form
+        contentPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        frame.setVisible(true);  // Make frame visible
+        frame.setVisible(true);
+
+        // Load existing items from CentralStorage
+        loadItems();
+    }
+
+    private void loadItems() {
+        model.setRowCount(0);  // Clear existing rows
+        for (Item item : CentralStorage.reportedItems) {
+            model.addRow(new Object[]{item.getItemName(), item.getLocation(), item.getDescription(), item.getStatus()});
+        }
     }
 
     public static void main(String[] args) {
-        Mahasiswa mahasiswa = new Mahasiswa("Derrick Muhammad Hanif", "202410370110383");  // Example Mahasiswa object
-        new MahasiswaDashboard(mahasiswa);  // Pass Mahasiswa object to the dashboard
+        Mahasiswa mahasiswa = new Mahasiswa("Derrick Muhammad Hanif", "202410370110383");
+        new MahasiswaDashboard(mahasiswa);
     }
 }

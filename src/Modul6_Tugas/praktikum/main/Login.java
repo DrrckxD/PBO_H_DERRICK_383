@@ -9,20 +9,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Login {
-    private static List<User> userList = new ArrayList<>(); // Static untuk akses dari luar kelas
+    private static List<User> userList = new ArrayList<>();
 
     public Login() {
-        // Menambahkan data pengguna ke dalam userList
         userList.add(new Admin("Admin123", "Password123"));
         userList.add(new Mahasiswa("Derrick Muhammad Hanif", "202410370110383"));
     }
 
-    // Getter untuk userList
+
     public static List<User> getUserList() {
         return userList;
     }
 
-    // Metode untuk memvalidasi login
     public boolean validateLogin(String username, String password, String role) {
         for (User user : userList) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {

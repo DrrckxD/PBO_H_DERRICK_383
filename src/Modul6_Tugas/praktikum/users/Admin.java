@@ -155,7 +155,7 @@ public class Admin extends User implements AdminActions {
 
     private void addMahasiswa(String name, String nim) {
         Mahasiswa mahasiswa = new Mahasiswa(name, nim);
-        Login.getUserList().add(mahasiswa);  // Menambahkan mahasiswa ke userList
+        Login.getUserList().add(mahasiswa);
         System.out.println("Mahasiswa berhasil ditambahkan!");
     }
 
@@ -170,16 +170,14 @@ public class Admin extends User implements AdminActions {
 
             switch (choice) {
                 case 1:
-                    // Menambahkan Mahasiswa
-                    scanner.nextLine(); // Membersihkan buffer
+                    scanner.nextLine();
                     System.out.print("Masukkan Nama Mahasiswa: ");
-                    String name = scanner.nextLine();  // Input nama mahasiswa
+                    String name = scanner.nextLine();
                     System.out.print("Masukkan NIM Mahasiswa: ");
-                    String nim = scanner.nextLine();   // Input NIM mahasiswa
-                    addMahasiswa(name, nim);  // Memanggil addMahasiswa dengan dua argumen
+                    String nim = scanner.nextLine();
+                    addMahasiswa(name, nim);
                     break;
                 case 2:
-                    // Menghapus Mahasiswa
                     removeMahasiswa();
                     break;
                 default:
@@ -187,11 +185,11 @@ public class Admin extends User implements AdminActions {
             }
         } catch (java.util.InputMismatchException e) {
             System.out.println("Input harus berupa angka! Silakan coba lagi.");
-            scanner.nextLine();  // membersihkan input buffer
+            scanner.nextLine();
         }
     }
 
-    // Menghapus Mahasiswa berdasarkan NIM
+
     public void removeMahasiswa() {
         Scanner scanner = new Scanner(System.in);
 
@@ -202,11 +200,11 @@ public class Admin extends User implements AdminActions {
         Iterator<User> iterator = userList.iterator();
         boolean found = false;
 
-        // Mencari Mahasiswa berdasarkan NIM dan menghapusnya
+
         while (iterator.hasNext()) {
             User user = iterator.next();
             if (user instanceof Mahasiswa && ((Mahasiswa) user).getUsername().equals(nimToDelete)) {
-                iterator.remove();  // Menghapus Mahasiswa dari userList
+                iterator.remove();
                 System.out.println("Mahasiswa dengan NIM " + nimToDelete + " berhasil dihapus.");
                 found = true;
                 break;
@@ -219,8 +217,7 @@ public class Admin extends User implements AdminActions {
     }
 
     public static void main(String[] args) {
-        Admin admin = new Admin("admin123", "password123");  // Memanggil konstruktor dengan argumen
-        admin.menu();  // Menjalankan menu untuk admin
+        Admin admin = new Admin("Admin383", "Password383");
+        admin.menu();
     }
 }
-

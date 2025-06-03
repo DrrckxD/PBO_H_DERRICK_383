@@ -34,7 +34,7 @@ public class Mahasiswa extends User implements MahasiswaActions {
             }
         } catch (java.util.InputMismatchException e) {
             System.out.println("Input harus berupa angka! Silakan coba lagi.");
-            scanner.nextLine(); // Clear the buffer
+            scanner.nextLine();
         }
     }
 
