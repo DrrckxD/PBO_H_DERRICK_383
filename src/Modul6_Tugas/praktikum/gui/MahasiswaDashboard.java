@@ -31,7 +31,7 @@ public class MahasiswaDashboard {
         welcomeLabel.setForeground(new Color(33, 150, 243));
         welcomeLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.add(welcomeLabel);
-        
+
         String[] columnNames = {"Nama Barang", "Lokasi", "Deskripsi", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
